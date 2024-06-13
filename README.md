@@ -29,3 +29,5 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+This application has been hosted in this link [https://weather-app-29ut.onrender.com/](https://weather-app-29ut.onrender.com/)
