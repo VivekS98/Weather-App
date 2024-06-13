@@ -2,10 +2,14 @@
 
 import Form from "@/components/Form";
 import LocationSearch from "@/components/LocationSearch";
-import MapDisplay from "@/components/MapDisplay";
 import WeatherInfo from "@/components/WeatherInfo";
 import { Position } from "@/utils/common.types";
+import dynamic from "next/dynamic";
 import { useState } from "react";
+
+const MapDisplay = dynamic(() => import("@/components/MapDisplay"), {
+  ssr: false,
+});
 
 export default function Home() {
   const [position, setPosition] = useState<Position>({
