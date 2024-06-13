@@ -35,7 +35,11 @@ const WeatherInfo: FC<Props> = ({ position }) => {
   }, [isCelsius, position, weather?.dt]);
 
   if (!weather?.name) {
-    return <></>;
+    return (
+      <>
+        <ToastContainer />
+      </>
+    );
   }
 
   return (
