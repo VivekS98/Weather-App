@@ -25,7 +25,7 @@ export default function Home() {
 
       <LocationSearch setPosition={setPosition} />
 
-      <div className="w-full flex flex-col lg:flex-row justify-between items-center">
+      <div className="w-full flex flex-col lg:flex-row justify-between">
         <Form position={position} setPosition={setPosition} />
         <MapDisplay zoom={13} setPosition={setPosition} position={position} />
       </div>

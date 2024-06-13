@@ -5,6 +5,8 @@ import { isNightAtDate } from "@/utils/date";
 import { Switch } from "@material-tailwind/react";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   position: Position;
@@ -20,13 +22,21 @@ const WeatherInfo: FC<Props> = ({ position }) => {
     const getWeather = () => {
       getWeatherInfo(position.lat, position.lng, isCelsius)
         .then((data) => {
-          setWeather(data);
-          setIsNight(isNightAtDate(data));
+          if (data?.cod === "400") {
+            toast.error(data?.message, { position: "top-left" });
+          } else {
+            setWeather(data);
+            setIsNight(isNightAtDate(data));
+          }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => toast(err));
     };
     getWeather();
   }, [isCelsius, position, weather?.dt]);
+
+  if (!weather?.name) {
+    return <></>;
+  }
 
   return (
     <div
@@ -34,6 +44,7 @@ const WeatherInfo: FC<Props> = ({ position }) => {
         isNight ? "from-deep-purple-900" : "from-blue-800"
       } to-transparent rounded-2xl`}
     >
+      <ToastContainer />
       <div className="flex flex-col items-start">
         <div className="flex flex-wrap justify-center items-center">
           <h3 className="text-lg lg:text-2xl font-bold">Weather Info:</h3>
